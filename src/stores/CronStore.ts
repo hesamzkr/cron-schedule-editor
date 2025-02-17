@@ -12,8 +12,8 @@ interface CronStore {
   monthDays: number[];
   toggleMonthDay: (monthDay: number) => void;
 
-  weekDays: string[];
-  toggleWeekDay: (weekDay: string) => void;
+  weekDays: number[];
+  toggleWeekDay: (weekDay: number) => void;
 
   minutes: number | undefined;
   setMinutes: (minutes: number | undefined) => void;
