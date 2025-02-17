@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ScheduleTypeSelector from "./components/ScheduleTypeSelector";
+import ScheduleInputs from "./components/ScheduleInputs";
+import ActionButtons from "./components/ActionButtons";
+import ExpressionDisplay from "./components/ExpressionDisplay";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [scheduleType, setScheduleType] = useState<"weekly" | "daily" | "monthly" | "custom">(
+    "weekly"
+  );
+  const [cronExpression, setCronExpression] = useState("0 23 ? * MON-FRI");
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="border rounded-lg p-6 bg-white shadow-sm">
+        <h2 className="text-xl font-semibold mb-4">Cron Schedule</h2>
+
+        <div className="flex gap-32">
+          <ScheduleTypeSelector scheduleType={scheduleType} onTypeChange={setScheduleType} />
+          <ScheduleInputs scheduleType={scheduleType} />
+        </div>
+
+        {/* Divider */}
+        <hr className="mt-16 border-gray-200" />
+
+        <ActionButtons onLoad={() => {}} onSave={() => {}} />
+        <ExpressionDisplay expression={cronExpression} onChange={setCronExpression} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
