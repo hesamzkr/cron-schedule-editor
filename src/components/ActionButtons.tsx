@@ -1,22 +1,18 @@
-function ActionButtons() {
-  const onLoad = () => {
-    console.log("Load");
-  };
+import { useConvertCron } from "../hooks/useConvertCron";
 
-  const onSave = () => {
-    console.log("Save");
-  };
+function ActionButtons() {
+  const { loadCron, saveCron } = useConvertCron();
 
   return (
     <div className="mt-6 flex justify-center gap-6">
       <button
-        onClick={onLoad}
+        onClick={loadCron}
         className="px-6 py-3 bg-gray-200 rounded-lg hover:bg-gray-300 font-medium min-w-[100px]"
       >
         Load
       </button>
       <button
-        onClick={onSave}
+        onClick={saveCron}
         className="px-6 py-3 bg-gray-200 rounded-lg hover:bg-gray-300 font-medium min-w-[100px]"
       >
         Save
