@@ -4,10 +4,10 @@ import ScheduleInputs from "./components/ScheduleInputs";
 import ActionButtons from "./components/ActionButtons";
 import ExpressionDisplay from "./components/ExpressionDisplay";
 
+type ScheduleType = "weekly" | "daily" | "monthly" | "custom";
+
 function App() {
-  const [scheduleType, setScheduleType] = useState<"weekly" | "daily" | "monthly" | "custom">(
-    "weekly"
-  );
+  const [scheduleType, setScheduleType] = useState<ScheduleType>("weekly");
   const [cronExpression, setCronExpression] = useState("0 23 ? * MON-FRI");
 
   return (
@@ -20,7 +20,6 @@ function App() {
           <ScheduleInputs scheduleType={scheduleType} />
         </div>
 
-        {/* Divider */}
         <hr className="mt-16 border-gray-200" />
 
         <ActionButtons onLoad={() => {}} onSave={() => {}} />
