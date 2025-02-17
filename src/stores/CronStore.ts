@@ -26,7 +26,7 @@ export const useCronStore = create<CronStore>((set) => ({
   scheduleType: "weekly",
   setScheduleType: (scheduleType) => set({ scheduleType }),
 
-  cronExpression: "0 23 ? * MON-FRI",
+  cronExpression: "* * * * *",
   setCronExpression: (cronExpression) => set({ cronExpression }),
 
   monthDays: [],
@@ -46,8 +46,8 @@ export const useCronStore = create<CronStore>((set) => ({
     })),
 
   minutes: undefined,
-  setMinutes: (minutes) => set({ minutes }),
+  setMinutes: (minutes) => set({ minutes, times: [undefined] }),
 
   times: [undefined],
-  setTimes: (times) => set({ times }),
+  setTimes: (times) => set({ times, minutes: undefined }),
 }));
