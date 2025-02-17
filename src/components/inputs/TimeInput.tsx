@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCronStore } from "../../stores/CronStore";
 
 function TimeInput() {
-  const [times, setTimes] = useState<(string | undefined)[]>([undefined]);
+  const { times, setTimes } = useCronStore();
 
   const addSecondTime = () => {
     if (times.length < 2) {

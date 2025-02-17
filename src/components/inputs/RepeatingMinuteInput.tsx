@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCronStore } from "../../stores/CronStore";
 
 function RepeatingMinuteInput() {
-  const [minutes, setMinutes] = useState<number | undefined>(undefined);
+  const { minutes, setMinutes } = useCronStore();
 
   return (
     <div className="flex items-center gap-2">

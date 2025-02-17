@@ -1,10 +1,9 @@
-interface ScheduleTypeSelectorProps {
-  scheduleType: "weekly" | "daily" | "monthly" | "custom";
-  onTypeChange: (type: "weekly" | "daily" | "monthly" | "custom") => void;
-}
+import { ScheduleType, useCronStore } from "../stores/CronStore";
 
-function ScheduleTypeSelector({ scheduleType, onTypeChange }: ScheduleTypeSelectorProps) {
-  const scheduleTypes = ["weekly", "daily", "monthly", "custom"] as const;
+function ScheduleTypeSelector() {
+  const { scheduleType, setScheduleType } = useCronStore();
+
+  const scheduleTypes: ScheduleType[] = ["weekly", "daily", "monthly", "custom"];
 
   return (
     <div className="space-y-2">
@@ -16,7 +15,7 @@ function ScheduleTypeSelector({ scheduleType, onTypeChange }: ScheduleTypeSelect
               className="form-radio"
               name="schedule"
               checked={scheduleType === type}
-              onChange={() => onTypeChange(type)}
+              onChange={() => setScheduleType(type)}
             />
             <span className="ml-2">{type.charAt(0).toUpperCase() + type.slice(1)}</span>
           </label>

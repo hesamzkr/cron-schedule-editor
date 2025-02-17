@@ -1,9 +1,12 @@
-interface ActionButtonsProps {
-  onLoad: () => void;
-  onSave: () => void;
-}
+function ActionButtons() {
+  const onLoad = () => {
+    console.log("Load");
+  };
 
-function ActionButtons({ onLoad, onSave }: ActionButtonsProps) {
+  const onSave = () => {
+    console.log("Save");
+  };
+
   return (
     <div className="mt-6 flex justify-center gap-6">
       <button
