@@ -62,11 +62,15 @@ export const useLoadCron = () => {
   };
 
   const loadCron = () => {
-    const [minutePart, hourPart, dayMonthPart, _, dayWeekPart] = cronExpression.split(" ");
+    try {
+      const [minutePart, hourPart, dayMonthPart, _, dayWeekPart] = cronExpression.split(" ");
 
-    convertCronToTime(minutePart, hourPart);
-    convertCronToDaysInMonth(dayMonthPart);
-    convertCronToDaysInWeek(dayWeekPart);
+      convertCronToTime(minutePart, hourPart);
+      convertCronToDaysInMonth(dayMonthPart);
+      convertCronToDaysInWeek(dayWeekPart);
+    } catch (error) {
+      alert("Invalid cron expression");
+    }
   };
 
   return { loadCron };
