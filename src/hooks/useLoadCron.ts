@@ -1,5 +1,5 @@
 import { useCronStore } from "../stores/CronStore";
-import { expandRange } from "../utils/format";
+import { expandRange, padNumber } from "../utils/format";
 
 export const useLoadCron = () => {
   const { cronExpression, setRepeatingMinutes, setTimes, setMonthDays, setWeekDays } =
@@ -35,7 +35,7 @@ export const useLoadCron = () => {
     for (let i = 0; i < maxLength; i++) {
       const hour = hours[i] || hours[0];
       const min = exactMinutes[i] || exactMinutes[0];
-      timesList.push(`${hour}:${min}`);
+      timesList.push(`${padNumber(Number(hour))}:${padNumber(min)}`);
     }
 
     setTimes(timesList);
