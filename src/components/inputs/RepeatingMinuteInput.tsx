@@ -1,16 +1,16 @@
 import { useCronStore } from "../../stores/CronStore";
 
 function RepeatingMinuteInput() {
-  const { minutes, setMinutes } = useCronStore();
+  const { repeatingMinutes, setRepeatingMinutes } = useCronStore();
 
   const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "") {
-      setMinutes(undefined);
+      setRepeatingMinutes(undefined);
     } else {
       const numberValue = Number(value);
       if (!isNaN(numberValue)) {
-        setMinutes(numberValue);
+        setRepeatingMinutes(numberValue);
       }
     }
   };
@@ -20,7 +20,7 @@ function RepeatingMinuteInput() {
       <span>Every</span>
       <input
         className="form-input border w-20 rounded px-2 py-1"
-        value={minutes === undefined ? "" : minutes}
+        value={repeatingMinutes === undefined ? "" : repeatingMinutes}
         onChange={handleMinutesChange}
       />
       <span>Minutes</span>

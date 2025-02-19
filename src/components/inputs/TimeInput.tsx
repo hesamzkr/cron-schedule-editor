@@ -5,7 +5,7 @@ function TimeInput() {
 
   const addSecondTime = () => {
     if (times.length < 2) {
-      setTimes([...times, undefined]);
+      setTimes([...times, ""]);
     }
   };
 

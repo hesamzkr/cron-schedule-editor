@@ -17,11 +17,11 @@ interface CronStore {
   toggleWeekDay: (weekDay: number) => void;
   setWeekDays: (weekDays: number[]) => void;
 
-  minutes: number | undefined;
-  setMinutes: (minutes: number | undefined) => void;
+  repeatingMinutes: number | undefined;
+  setRepeatingMinutes: (minutes: number | undefined) => void;
 
-  times: (string | undefined)[];
-  setTimes: (times: (string | undefined)[]) => void;
+  times: string[];
+  setTimes: (times: string[]) => void;
 }
 
 export const useCronStore = create<CronStore>((set) => ({
@@ -49,9 +49,9 @@ export const useCronStore = create<CronStore>((set) => ({
     })),
   setWeekDays: (weekDays) => set({ weekDays }),
 
-  minutes: undefined,
-  setMinutes: (minutes) => set({ minutes, times: [undefined] }),
+  repeatingMinutes: undefined,
+  setRepeatingMinutes: (minutes) => set({ repeatingMinutes: minutes }),
 
-  times: [undefined],
-  setTimes: (times) => set({ times, minutes: undefined }),
+  times: [""],
+  setTimes: (times) => set({ times }),
 }));
