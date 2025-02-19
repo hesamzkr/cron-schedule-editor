@@ -17,12 +17,16 @@ function WeekDayInput() {
     toggleWeekDay(dayIndex);
   };
 
+  const getSelectedDayNames = () => {
+    return weekDays.map((index) => allWeekDays[index].slice(0, 3)).join(", ");
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <span>Days Of Week:</span>
         {weekDays.length === 0 && <span className="text-gray-500">Every day</span>}
-        {weekDays.length > 0 && <span className="text-gray-700">{weekDays.join(", ")}</span>}
+        {weekDays.length > 0 && <span className="text-gray-700">{getSelectedDayNames()}</span>}
       </div>
       <div className="flex flex-wrap gap-2">
         {allWeekDays.map((day, index) => (
