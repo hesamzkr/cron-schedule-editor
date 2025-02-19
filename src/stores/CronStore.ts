@@ -26,7 +26,22 @@ interface CronStore {
 
 export const useCronStore = create<CronStore>((set) => ({
   scheduleType: "custom",
-  setScheduleType: (scheduleType) => set({ scheduleType }),
+  setScheduleType: (scheduleType) => {
+    switch (scheduleType) {
+      case "weekly":
+        set({ monthDays: [], scheduleType });
+        break;
+      case "daily":
+        set({ weekDays: [], monthDays: [], scheduleType });
+        break;
+      case "monthly":
+        set({ weekDays: [], repeatingMinutes: undefined, scheduleType });
+        break;
+      case "custom":
+        set({ scheduleType });
+        break;
+    }
+  },
 
   cronExpression: "* * * * *",
   setCronExpression: (cronExpression) => set({ cronExpression }),
