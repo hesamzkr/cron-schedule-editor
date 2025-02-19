@@ -11,9 +11,11 @@ interface CronStore {
 
   monthDays: number[];
   toggleMonthDay: (monthDay: number) => void;
+  setMonthDays: (monthDays: number[]) => void;
 
   weekDays: number[];
   toggleWeekDay: (weekDay: number) => void;
+  setWeekDays: (weekDays: number[]) => void;
 
   minutes: number | undefined;
   setMinutes: (minutes: number | undefined) => void;
@@ -23,7 +25,7 @@ interface CronStore {
 }
 
 export const useCronStore = create<CronStore>((set) => ({
-  scheduleType: "weekly",
+  scheduleType: "custom",
   setScheduleType: (scheduleType) => set({ scheduleType }),
 
   cronExpression: "* * * * *",
@@ -36,6 +38,7 @@ export const useCronStore = create<CronStore>((set) => ({
         ? state.monthDays.filter((day) => day !== monthDay)
         : [...state.monthDays, monthDay],
     })),
+  setMonthDays: (monthDays) => set({ monthDays }),
 
   weekDays: [],
   toggleWeekDay: (weekDay) =>
@@ -44,6 +47,7 @@ export const useCronStore = create<CronStore>((set) => ({
         ? state.weekDays.filter((day) => day !== weekDay)
         : [...state.weekDays, weekDay],
     })),
+  setWeekDays: (weekDays) => set({ weekDays }),
 
   minutes: undefined,
   setMinutes: (minutes) => set({ minutes, times: [undefined] }),

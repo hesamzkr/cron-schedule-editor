@@ -1,13 +1,15 @@
 import { useCronStore } from "../stores/CronStore";
 
-export const useConvertCron = () => {
+export const useSaveCron = () => {
   const { setCronExpression, monthDays, weekDays, minutes, times } = useCronStore();
 
   const convertTimeToCron = () => {
     if (minutes === undefined) {
-      return times.map((time) => `${time?.split(":")[1]} ${time?.split(":")[0]}`).join(",");
+      const mins = times.map((time) => `${time?.split(":")[1]}`).join(",");
+      const hours = times.map((time) => `${time?.split(":")[0]}`).join(",");
+      return `${mins} ${hours}`;
     } else {
-      return `*/${minutes}`;
+      return `*/${minutes} *`;
     }
   };
 
@@ -32,9 +34,5 @@ export const useConvertCron = () => {
     setCronExpression(cron);
   };
 
-  const loadCron = () => {
-    console.log("Load cron");
-  };
-
-  return { saveCron, loadCron };
+  return { saveCron };
 };
