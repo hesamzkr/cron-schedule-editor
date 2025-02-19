@@ -5,8 +5,9 @@ export const useLoadCron = () => {
     useCronStore();
 
   const convertCronToTime = (minutePart: string, hourPart: string) => {
+    setRepeatingMinutes(undefined);
     const minutes = minutePart.split(",");
-    const hours = hourPart.split(",");
+    const hours = hourPart.split(",").filter((hour) => hour !== "*");
 
     const exactMinutes = [];
     for (const minute of minutes) {
@@ -14,8 +15,16 @@ export const useLoadCron = () => {
         const intervalMinutes = minutePart.split("*/")[1];
         setRepeatingMinutes(Number(intervalMinutes));
       } else {
-        exactMinutes.push(minute);
+        const exactMinute = Number(minute);
+        if (!isNaN(exactMinute)) {
+          exactMinutes.push(exactMinute);
+        }
       }
+    }
+
+    if (exactMinutes.length === 0 && hours.length === 0) {
+      setTimes([""]);
+      return;
     }
 
     // This is done in case the expression is in the format "30 9,15" or "30,45 10"
