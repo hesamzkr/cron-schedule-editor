@@ -47,7 +47,10 @@ export const useLoadCron = () => {
       return;
     }
 
-    const daysInMonth = dayMonthPart.split(",").flatMap(expandRange);
+    const daysInMonth = dayMonthPart
+      .split(",")
+      .flatMap(expandRange)
+      .filter((day) => !isNaN(day) && day >= 1 && day <= 31);
     setMonthDays(daysInMonth);
   };
 
@@ -57,7 +60,10 @@ export const useLoadCron = () => {
       return;
     }
 
-    const daysInWeek = dayWeekPart.split(",").flatMap(expandRange);
+    const daysInWeek = dayWeekPart
+      .split(",")
+      .flatMap(expandRange)
+      .filter((day) => !isNaN(day) && day >= 1 && day <= 7);
     setWeekDays(daysInWeek);
   };
 
