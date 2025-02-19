@@ -1,4 +1,5 @@
 import { useCronStore } from "../stores/CronStore";
+import { compressToRanges } from "../utils/format";
 
 export const useSaveCron = () => {
   const { setCronExpression, monthDays, weekDays, repeatingMinutes, times } = useCronStore();
@@ -26,19 +27,11 @@ export const useSaveCron = () => {
   };
 
   const convertDaysInMonthToCron = () => {
-    if (monthDays.length === 0) {
-      return "*";
-    } else {
-      return monthDays.join(",");
-    }
+    return compressToRanges(monthDays);
   };
 
   const convertDaysInWeekToCron = () => {
-    if (weekDays.length === 0) {
-      return "*";
-    } else {
-      return weekDays.join(",");
-    }
+    return compressToRanges(weekDays);
   };
 
   const saveCron = () => {
