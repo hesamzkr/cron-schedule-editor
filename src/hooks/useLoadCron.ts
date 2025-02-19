@@ -1,4 +1,5 @@
 import { useCronStore } from "../stores/CronStore";
+import { expandRange } from "../utils/format";
 
 export const useLoadCron = () => {
   const { cronExpression, setRepeatingMinutes, setTimes, setMonthDays, setWeekDays } =
@@ -41,12 +42,22 @@ export const useLoadCron = () => {
   };
 
   const convertCronToDaysInMonth = (dayMonthPart: string) => {
-    const daysInMonth = dayMonthPart === "*" ? [] : dayMonthPart.split(",").map(Number);
+    if (dayMonthPart === "*") {
+      setMonthDays([]);
+      return;
+    }
+
+    const daysInMonth = dayMonthPart.split(",").flatMap(expandRange);
     setMonthDays(daysInMonth);
   };
 
   const convertCronToDaysInWeek = (dayWeekPart: string) => {
-    const daysInWeek = dayWeekPart === "*" ? [] : dayWeekPart.split(",").map(Number);
+    if (dayWeekPart === "*") {
+      setWeekDays([]);
+      return;
+    }
+
+    const daysInWeek = dayWeekPart.split(",").flatMap(expandRange);
     setWeekDays(daysInWeek);
   };
 
