@@ -6,6 +6,8 @@ interface CronStore {
   scheduleType: ScheduleType;
   setScheduleType: (scheduleType: ScheduleType) => void;
 
+  determineScheduleType: () => void;
+
   cronExpression: string;
   setCronExpression: (cronExpression: string) => void;
 
@@ -24,7 +26,7 @@ interface CronStore {
   setTimes: (times: string[]) => void;
 }
 
-export const useCronStore = create<CronStore>((set) => ({
+export const useCronStore = create<CronStore>((set, get) => ({
   scheduleType: "custom",
   setScheduleType: (scheduleType) => {
     switch (scheduleType) {
@@ -40,6 +42,19 @@ export const useCronStore = create<CronStore>((set) => ({
       case "custom":
         set({ scheduleType });
         break;
+    }
+  },
+
+  determineScheduleType: () => {
+    const state = get();
+    if (state.weekDays.length === 0 && state.monthDays.length === 0) {
+      set({ scheduleType: "daily" });
+    } else if (state.repeatingMinutes === undefined && state.weekDays.length === 0) {
+      set({ scheduleType: "monthly" });
+    } else if (state.monthDays.length === 0) {
+      set({ scheduleType: "weekly" });
+    } else {
+      set({ scheduleType: "custom" });
     }
   },
 

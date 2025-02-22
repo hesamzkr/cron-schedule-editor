@@ -2,8 +2,14 @@ import { useCronStore } from "../stores/CronStore";
 import { expandRange, padNumber } from "../utils/format";
 
 export const useLoadCron = () => {
-  const { cronExpression, setRepeatingMinutes, setTimes, setMonthDays, setWeekDays } =
-    useCronStore();
+  const {
+    cronExpression,
+    setRepeatingMinutes,
+    setTimes,
+    setMonthDays,
+    setWeekDays,
+    determineScheduleType,
+  } = useCronStore();
 
   const convertCronToTime = (minutePart: string, hourPart: string) => {
     setRepeatingMinutes(undefined);
@@ -75,6 +81,7 @@ export const useLoadCron = () => {
       convertCronToTime(minutePart, hourPart);
       convertCronToDaysInMonth(dayMonthPart);
       convertCronToDaysInWeek(dayWeekPart);
+      determineScheduleType();
     } catch (error) {
       alert("Invalid cron expression");
     }
