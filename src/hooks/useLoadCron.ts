@@ -33,8 +33,9 @@ export const useLoadCron = () => {
     const timesList = [];
     const maxLength = Math.max(exactMinutes.length, hours.length);
     for (let i = 0; i < maxLength; i++) {
-      const hour = hours[i] || hours[0];
-      const min = exactMinutes[i] || exactMinutes[0];
+      const hour = hours[i] || hours[0] || 0;
+      const min = exactMinutes[i] || exactMinutes[0] || 0;
+
       timesList.push(`${padNumber(Number(hour))}:${padNumber(min)}`);
     }
 
